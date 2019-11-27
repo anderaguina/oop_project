@@ -14,7 +14,8 @@ public class Menu {
 	// Reservations options
 	public void reservationsMenu() {
 		System.out.println("1. New reservation");
-		System.out.println("2. Add to reservation");		
+		System.out.println("2. Add to reservation");
+		System.out.println("b. Go back to main menu");
 	}
 	
 	/*// Rooms options

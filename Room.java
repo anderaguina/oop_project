@@ -20,7 +20,17 @@ public class Room {
 	
 	// Check which rooms are free
 	public boolean isFree() {
-		return maxGuests > currentGuests;
+		return free;
+	}
+	
+	// Toggle the status of the room
+	public void toggleFree() {
+		free = !free;
+	}
+	
+	// Check if room is big enough
+	public boolean bigEnough(int numGuests) {
+		return maxGuests >= numGuests;
 	}
 
 	@Override
