@@ -1,33 +1,20 @@
 package project;
 
 public class Guest {
-	
-	/* CLASS ATTRIBUTES */
 	private String name;
 	private String email;
 	private String address;
 	private String phoneNumber;
 	private String type;
 	
-	// Class constructor with fields
-	public Guest (String name, String email, String address, String phoneNumber, String type) {
-		this.name = name;
-		this.email = email;
-		this.address = address;
-		this.phoneNumber = phoneNumber;
-		this.type = type;
+	public Guest() {
+		this.name = "";
+		this.email = "";
+		this.address = "";
+		this.phoneNumber = "";
+		this.type = "";
 	}
 	
-	/* CLASS METHOD */
-	
-	// Check if guest is lecturer
-	public boolean isLecturer() {
-		if (type.toLowerCase() == "lecturer") {
-			return true;
-		} else {
-			return false;
-		}
-	}
 	
 	@Override
 	public String toString() {

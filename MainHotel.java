@@ -20,41 +20,33 @@ public class MainHotel {
 			 roomList[i] = room1; 
 		 }
 		 
-		 // roomList[1].toggleFree();
-		 
 		 // User option choice
 		 int option;
 		 
-		 // Main menu
-		 menu.mainMenu();
-		 option = keyboard.nextInt();
-		 // Clean scanner from \n
-		 keyboard.nextLine();
-		 
-		 //Redirect from main menu to option menus
-		 switch (option) {
-			 case 1:
-				 Reservation reservation = new Reservation();
-				 option = reservation.reservationMainMenu();
-				 switch (option) {
-				 	case 0:
-				 		menu.mainMenu();
-				 		break;
-				 	case 1:
-				 		System.out.println("New reservation");
-				 		reservation.newReservation(roomList);
-				 		break;
-				 	case 2:
-				 		System.out.println("Add guest to reservation");
-				 		break;
-				 }
-				 break;
-			 case 2:
-				 helper.getGuests(roomList);
-				 break;
-			 case 3:
-				 helper.availableRooms(roomList);
-				 break;
-		 }
+		 do {		 
+			 // Main menu
+			 menu.mainMenu();
+			 option = keyboard.nextInt();
+			 // Clean scanner from \n
+			 keyboard.nextLine();
+			 
+			 //Redirect from main menu to option menus
+			 switch (option) {
+				 case 1:
+					 menu.reservationsMenu(roomList);
+					 break;
+				 case 2:
+					 helper.getGuests(roomList);
+					 break;
+				 case 3:
+					 helper.availableRooms(roomList);
+					 break;
+				 case 4:
+					 break;
+				 case 5:
+					 System.out.println("See you soon!");
+					 break;
+			 }
+		 } while(option != 5);
 	}
 }

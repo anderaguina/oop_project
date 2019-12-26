@@ -18,19 +18,24 @@ public class Room {
 		this.booker = booker;
 	}
 	
-	// Check which rooms are free
-	public boolean isFree() {
-		return free;
-	}
-	
-	// Toggle the status of the room
-	public void toggleFree() {
-		free = !free;
+	// Occupy room
+	public void book() {
+		this.free = false;
 	}
 	
 	// Check if room is big enough
 	public boolean bigEnough(int numGuests) {
 		return maxGuests >= numGuests;
+	}
+	
+	// Check if rooms has space
+	public boolean hasSpace() {
+		return maxGuests > currentGuests;
+	}
+	
+	// Check which rooms are free
+	public boolean isFree() {
+		return free;
 	}
 
 	@Override
