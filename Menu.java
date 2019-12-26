@@ -39,6 +39,7 @@ public class Menu {
 				displayReservations(rooms);
 				break;
 			case 3:
+				cancelReservation(rooms);
 				break;
 			case 4:
 				break;
@@ -54,6 +55,22 @@ public class Menu {
 			System.out.println("Name of the booker: "+ notAvailable.get(i).getBooker());
 			System.out.println("Number of guests in room: " + notAvailable.get(i).getCurrentGuests());
 		}
+	}
+	
+	public void cancelReservation(Room[] rooms) {
+		
+		for (int i = 0; i<rooms.length;i++) {
+			if (!rooms[i].isFree()) {
+				System.out.println("Room : " + i);
+				System.out.println("Booker: "+  rooms[i].getBooker());
+			}
+		}
+		
+		System.out.println("WHICH RESERVATION WOULD YOU LIKE TO CANCEL");
+		int option = keyboard.nextInt();
+		keyboard.nextLine();
+		
+		
 	}
 	
 	// Rooms options
