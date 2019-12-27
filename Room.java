@@ -6,10 +6,10 @@ public class Room {
 	private boolean free;
 	private int maxGuests;
 	private int currentGuests;
-	private String booker;
+	private Guest booker;
 
 	// Constructor with fields
-	public Room(int roomNumber, double ratePerPerson, boolean free, int maxGuests, int currentGuests, String booker) {
+	public Room(int roomNumber, double ratePerPerson, boolean free, int maxGuests, int currentGuests, Guest booker) {
 		this.roomNumber = roomNumber;
 		this.ratePerPerson = ratePerPerson;
 		this.free = free;
@@ -21,6 +21,11 @@ public class Room {
 	// Occupy room
 	public void book() {
 		this.free = false;
+	}
+	
+	// Free room
+	public void free() {
+		this.free = true;
 	}
 	
 	// Check if room is big enough
@@ -78,10 +83,10 @@ public class Room {
 	public void setCurrentGuests(int currentGuests) {
 		this.currentGuests = currentGuests;
 	}
-	public String getBooker() {
+	public Guest getBooker() {
 		return booker;
 	}
-	public void setBooker(String booker) {
+	public void setBooker(Guest booker) {
 		this.booker = booker;
 	}
 	

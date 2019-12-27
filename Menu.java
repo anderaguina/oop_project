@@ -59,17 +59,26 @@ public class Menu {
 	
 	public void cancelReservation(Room[] rooms) {
 		
+		ArrayList<Integer> reservations = new ArrayList<Integer>();
+		
 		for (int i = 0; i<rooms.length;i++) {
 			if (!rooms[i].isFree()) {
 				System.out.println("Room : " + i);
 				System.out.println("Booker: "+  rooms[i].getBooker());
+				reservations.add(i);
 			}
 		}
-		
-		System.out.println("WHICH RESERVATION WOULD YOU LIKE TO CANCEL");
-		int option = keyboard.nextInt();
-		keyboard.nextLine();
-		
+		int option;
+		do {
+			System.out.println("WHICH RESERVATION WOULD YOU LIKE TO CANCEL");
+			option = keyboard.nextInt();
+			keyboard.nextLine();
+		} while (!reservations.contains(option));
+				
+		rooms[option].setCurrentGuests(0);
+		rooms[option].free();
+		Guest emptyGuest = new Guest();
+		rooms[option].setBooker(emptyGuest);
 		
 	}
 	
@@ -107,7 +116,7 @@ public class Menu {
 				
 			Guest guest = guestReservationDetails();
 			
-			rooms[position].setBooker(guest.getName());
+			rooms[position].setBooker(guest);
 			rooms[position].book();
 			rooms[position].setCurrentGuests(numGuests);
 			
@@ -126,12 +135,52 @@ public class Menu {
 		System.out.println("Guest name: ");
 		String name = keyboard.nextLine();
 		
-		System.out.println("Is lecturer?");
+		System.out.println("Is lecturer? y/n");
 		String isLecturer = keyboard.nextLine();
 		
-		guest.setName(name);
-		guest.setType("lecturer");
+		if (isLecturer.equalsIgnoreCase("y")) {
+			guest.setType("lecturer");
+		} else {
+			guest.setType("student");
+		}
+		guest.setName(name);		
 		
 		return guest;
+	}
+	
+	public String processPayment(Room[] rooms) {
+		ArrayList<Integer> reservations = new ArrayList<Integer>();
+		
+		System.out.println("Guest name?");
+		String guestName = keyboard.nextLine();
+		
+		System.out.println("DEBUG 0: " + guestName);
+		
+		for (int i = 0; i<rooms.length;i++) {
+			if (!rooms[i].isFree()) {
+				System.out.println("DEBUG 1: " + rooms[i].isFree());
+				System.out.println("DEBUG 2: " + rooms[i].getBooker()+"test ");
+				System.out.println("DEBUG 3: " + guestName + "test ");
+				System.out.println("DEBUG 4: ");
+				System.out.println(guestName == rooms[i].getBooker().getName());
+				System.out.println("DEBUG 5: ");
+				System.out.println(guestName.equals(rooms[i].getBooker()));
+				if (guestName.equals(rooms[i].getBooker().getName())) {
+					String confirmationOfPayment;
+					if (rooms[i].getBooker().getType() == "lecturer") {
+						confirmationOfPayment = "Confirmed payment of " + (rooms[i].getRatePerPerson() * rooms[i].getCurrentGuests() * 0.9 ) + "€";
+					} else {
+						confirmationOfPayment = "Confirmed payment of " + rooms[i].getRatePerPerson() * rooms[i].getCurrentGuests() + "€";
+					}
+					rooms[i].setCurrentGuests(0);
+					rooms[i].free();
+					Guest emptyGuest = new Guest();
+					rooms[i].setBooker(emptyGuest);
+					return confirmationOfPayment;
+				}
+			}
+		}
+		
+		return "No such guest found";
 	}
 }

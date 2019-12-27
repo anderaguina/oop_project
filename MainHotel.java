@@ -12,11 +12,13 @@ public class MainHotel {
 		 // Helper functions object
 		 HelperFunctions helper = new HelperFunctions();
 		 
-		 // ROOMS
+		 // Empty guest object
+		 Guest emptyGuest = new Guest();
 		 
+		 // ROOMS		 
 		 Room[] roomList = new Room[26];
 		 for (int i = 0; i<26; i++) {
-			 Room room1 = new Room(i, 2.2, true, 5, 5, "a");
+			 Room room1 = new Room(i, 2.2, true, 5, 5, emptyGuest);
 			 roomList[i] = room1; 
 		 }
 		 
@@ -42,6 +44,7 @@ public class MainHotel {
 					 helper.availableRooms(roomList);
 					 break;
 				 case 4:
+					 System.out.println(menu.processPayment(roomList));
 					 break;
 				 case 5:
 					 System.out.println("See you soon!");
