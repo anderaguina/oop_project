@@ -1,9 +1,10 @@
 package project;
 
+import java.io.IOException;
 import java.util.*;
 
 public class MainHotel {
-	public static void main(String args[]) {
+	public static void main(String args[]) throws IOException {
 		 Scanner keyboard = new Scanner(System.in);
 		 
 		 // Menu object
@@ -17,9 +18,26 @@ public class MainHotel {
 		 
 		 // ROOMS		 
 		 Room[] roomList = new Room[26];
-		 for (int i = 0; i<26; i++) {
-			 Room room1 = new Room(i, 2.2, true, 5, 5, emptyGuest);
-			 roomList[i] = room1; 
+		 
+		 // Suits
+		 int s;
+		 for (s = 0; s<6; s++) {
+			 Room room = new Room(s, 150, true, 0, 3, emptyGuest);
+			 roomList[s] = room; 
+		 }
+		 
+		 // Doubles
+		 int d;
+		 for (d = s; d<14; d++) {
+			 Room room = new Room(d, 100, true, 0, 2, emptyGuest);
+			 roomList[d] = room; 
+		 }
+		 
+		 // Singles
+		 int sin;
+		 for (sin = d; sin<26; sin++) {
+			 Room room = new Room(sin, 75, true, 0, 1, emptyGuest);
+			 roomList[sin] = room; 
 		 }
 		 
 		 // User option choice
@@ -47,6 +65,7 @@ public class MainHotel {
 					 System.out.println(menu.processPayment(roomList));
 					 break;
 				 case 5:
+					 helper.writeDetailsToFile(roomList);
 					 System.out.println("See you soon!");
 					 break;
 			 }

@@ -1,4 +1,8 @@
 package project;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class HelperFunctions {
@@ -40,6 +44,28 @@ public class HelperFunctions {
 			price = price*0.9;
 		} 
 		System.out.println("Price is = " + price);
+	}
+	
+	public void writeDetailsToFile(Room[] rooms) throws IOException {
+		FileWriter fileWriter = new FileWriter("./database.txt");
+	    PrintWriter printWriter = new PrintWriter(fileWriter);
+	    
+	    for (int i = 0; i<rooms.length; i++) {
+	    	printWriter.print("roomNumber: " + rooms[i].getRoomNumber());
+	    	printWriter.print(", ");
+	    	
+	    	printWriter.print("currentGuests: " + rooms[i].getCurrentGuests());
+	    	printWriter.print(", ");
+	    	
+	    	printWriter.print("free: " + rooms[i].isFree());
+	    	printWriter.print(", ");
+	    	
+	    	printWriter.print("booker: " + rooms[i].getBooker());
+	    	printWriter.print(", ");
+	    	
+	    	printWriter.println();
+	    }
+	    printWriter.close();
 	}
 	
 }
